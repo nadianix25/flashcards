@@ -1,2 +1,1 @@
-from classes.card import *
-print(Card())
+from classes import *
