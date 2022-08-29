@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS card;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS card_groups;
+
+CREATE TABLE card (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT UNIQUE NOT NULL,
+  content TEXT NOT NULL,
+  hint TEXT NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE groups (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT UNIQUE NOT NULL,
+  description TEXT NOT NULL,
+  created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE card_groups (
+  card_id INTEGER NOT NULL,
+  groups_id INTEGER NOT NULL,
+  FOREIGN KEY (card_id) REFERENCES card (id),
+  FOREIGN KEY (groups_id) REFERENCES groups (id),
+  primary key (card_id, groups_id)
+);
