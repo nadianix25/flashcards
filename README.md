@@ -5,7 +5,7 @@ to install dependencies please run the following command:
   pip install -r requirements.txt
 
 To run server:
-  flask --app flaskr --debug run
+  flask --app app --debug run
 
 To initialized database please run:
 

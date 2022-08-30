@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from . import db
 from . import card
-
+from . import home
 
 def create_app(test_config=None):
     # create and configure the app
@@ -16,6 +16,7 @@ def create_app(test_config=None):
     db.init_app(app)
 
     app.register_blueprint(card.bp)
+    app.register_blueprint(home.bp)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -30,7 +31,7 @@ def create_app(test_config=None):
         pass
 
     @app.route("/")
-    def home():
+    def hello():
         return "Hello this is the home page"
 
     return app
