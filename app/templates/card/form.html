@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mypersonalstyle.css') }}">
+    <title></title>
+  </head>
+  <body>
+    <div class="w3-row">
+     <div class="w3-half w3-container">
+       <h2>Groups</h2>
+     </div>
+     <div class="w3-half w3-container">
+       <h2>Cards</h2>
+       <button onclick="document.getElementById('card_form').style.display='block'" class="w3-button w3-black">new card</button>
+     </div>
+   </div>
+
+
+      <!-- So this is the modal -->
+      <div id="card_form" class="w3-modal w3-card">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span onclick="document.getElementById('card_form').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <form class="w3-container w3-margin" method="post">
+             <label>Title</label>
+             <input class="w3-input w3-border-0" type="text" name="title">
+             <label>Content</label>
+             <input class="w3-input w3-border-0" type="textarea" name="content">
+             <label>Hint</label>
+             <input class="w3-input w3-border-0" type="text" name="hint">
+            <button class="w3-btn w3-blue-grey">Create</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
