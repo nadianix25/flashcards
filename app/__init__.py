@@ -1,9 +1,8 @@
 import os
 
 from flask import Flask
-from . import db
-from . import card
-from . import home
+from . import db, card, home, group
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -17,6 +16,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(card.bp)
     app.register_blueprint(home.bp)
+    app.register_blueprint(group.bp)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing

@@ -11,6 +11,8 @@
     <div class="w3-row">
      <div class="w3-half w3-container">
        <h2>Groups</h2>
+       <button onclick="document.getElementById('group_form').style.display='block'" class="w3-button w3-black">new group</button>
+
      </div>
      <div class="w3-half w3-container">
        <h2>Cards</h2>
@@ -19,7 +21,7 @@
    </div>
 
 
-      <!-- So this is the modal -->
+      <!-- Modal to create a card -->
       <div id="card_form" class="w3-modal w3-card">
         <div class="w3-modal-content">
           <div class="w3-container">
@@ -36,6 +38,22 @@
           </div>
         </div>
       </div>
+      <!-- Modal to create a group-->
+      <div id="group_form" class="w3-modal w3-card">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span onclick="document.getElementById('group_form').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <form class="w3-container w3-margin" method="post" action="/group">
+             <label>Title</label>
+             <input class="w3-input w3-border-0" type="text" name="title">
+             <label>Description</label>
+             <input class="w3-input w3-border-0" type="textarea" name="description">
+            <button class="w3-btn w3-blue-grey">Create</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
     </div>
   </body>
 </html>
