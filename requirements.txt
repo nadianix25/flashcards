@@ -1,2 +1,3 @@
 black
 flask
+psycopg2-binary

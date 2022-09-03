@@ -9,6 +9,7 @@ from app.db import get_db
 
 bp = Blueprint('card', __name__, url_prefix='/card')
 
+
 @bp.route('/', methods=('GET', 'POST', 'PUT', 'DELETE'))
 def register():
     if request.method == 'POST':
@@ -25,8 +26,8 @@ def register():
 
         if error is None:
             try:
-                db.execute(
-                    "INSERT INTO card (title, content, hint) VALUES (?, ?, ?)",
+                db.cursor().execute(
+                    "INSERT INTO card (title, content, hint) VALUES (%s, %s, %s)",
                     (title, content, hint),
                 )
                 db.commit()
@@ -35,8 +36,6 @@ def register():
             else:
                 return "U saved a card"
 
-
-
-        flash(error) # what is this?
+        flash(error)  # what is this?
 
     return render_template('card/form.html')

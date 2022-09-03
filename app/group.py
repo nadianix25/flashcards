@@ -25,8 +25,8 @@ def register():
 
         if error is None:
             try:
-                db.execute(
-                    "INSERT INTO groups (title, description) VALUES (?, ?)",
+                db.cursor().execute(
+                    "INSERT INTO groups (title, description) VALUES (%s, %s)",
                     (title, description),
                 )
                 db.commit()
