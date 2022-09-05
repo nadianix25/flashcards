@@ -7,35 +7,34 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
 
-bp = Blueprint('card', __name__, url_prefix='/card')
+bp = Blueprint('group', __name__, url_prefix='/group')
 
 
-@bp.route('/', methods=('POST', 'PUT', 'DELETE'))
+@bp.route('/', methods=('GET', 'POST', 'PUT', 'DELETE'))
 def register():
     if request.method == 'POST':
         title = request.form['title']
-        content = request.form['content']
-        hint = request.form['hint']
+        description = request.form['description']
         db = get_db()
         error = None
 
         if not title:
             error = 'Title is required'
-        elif not content:
-            error = 'Content is required'
+        elif not description:
+            error = 'Description is required'
 
         if error is None:
             try:
                 db.cursor().execute(
-                    "INSERT INTO card (title, content, hint) VALUES (%s, %s, %s)",
-                    (title, content, hint),
+                    "INSERT INTO groups (title, description) VALUES (%s, %s)",
+                    (title, description),
                 )
                 db.commit()
             except db.IntegrityError:
                 error = f"title {title} is already exists."
             else:
-                error = None
+                return "U saved a group"
 
-        flash(error) # what is this?
+        flash(error)  # what is this?
 
-    return redirect(url_for('home.home'))
+    return render_template('card/form.html')
