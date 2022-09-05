@@ -10,7 +10,7 @@ from app.db import get_db
 bp = Blueprint('card', __name__, url_prefix='/card')
 
 
-@bp.route('/', methods=('GET', 'POST', 'PUT', 'DELETE'))
+@bp.route('/', methods=('POST', 'PUT', 'DELETE'))
 def register():
     if request.method == 'POST':
         title = request.form['title']
@@ -34,8 +34,8 @@ def register():
             except db.IntegrityError:
                 error = f"title {title} is already exists."
             else:
-                return "U saved a card"
+                error = None
 
-        flash(error)  # what is this?
+        flash(error) # what is this?
 
-    return render_template('card/form.html')
+    return redirect(url_for('home.home'))
