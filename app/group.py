@@ -4,7 +4,7 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-
+from app.models import db, Group
 bp = Blueprint('group', __name__, url_prefix='/group')
 
 
@@ -21,5 +21,9 @@ def register():
             error = 'Description is required'
 
         flash(error)  # what is this?
+
+        g = Group(title=title, description=description)
+        db.session.add(g)
+        db.session.commit()
 
     return redirect(url_for('home.home'))

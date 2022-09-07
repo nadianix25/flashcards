@@ -5,6 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from app.models import db, Card
 
 bp = Blueprint('card', __name__, url_prefix='/card')
 
@@ -23,6 +24,10 @@ def register():
             error = 'Content is required'
 
         flash(error)  # what is this?
+
+        c = Card(title=title, content=content, hint=hint)
+        db.session.add(c)
+        db.session.commit()
 
     return redirect(url_for('home.home'))
 
