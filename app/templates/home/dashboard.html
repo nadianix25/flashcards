@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mypersonalstyle.css') }}">
     <title>Dashboard</title>
 
   </head>
+   <script src="{{ url_for('static',filename='js/dashboard.js') }}"></script>
   <body>
+
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>
@@ -22,34 +25,37 @@
     <div class="w3-row">
 
      <div class="w3-quarter w3-container">
-           <h2>Groups</h2>
+       <div>
+        <h2 class="float-left">Groups</h2>
+        <button onclick="document.getElementById('group_form').style.display='block'" class="w3-button w3-black float-right" style="margin-top:5%;">+</button>
+      </div>
+      <div class="clear"></div>
+        {% if groups %}
+          {% for group in groups %}
+
+             <div class="group-card" style="width:100%;">
+               <header class="w3-container">
+                 <h5>{{ group['title'] }}</h5>
+               </header>
+
+               <footer class="w3-container">
+               </footer>
+             </div>
+             <br>
+          {% endfor %}
+         {% endif %}
        </div>
 
-     <div class="w3-threequarter w3-container">
-        <div style="float:center">
-          <h2>Cards</h2>
-        </div>
-       <div style="float:right">
-         <button onclick="document.getElementById('card_form').style.display='block'" class="w3-button w3-black">new card</button>
+     <div class="w3-half w3-container">
+        <div>
+          <h2 class="float-left">Cards</h2>
+         <button onclick="document.getElementById('card_form').style.display='block'" class="w3-button w3-black float-right" style="margin-top:2%;">+</button>
        </div>
-       <br>
-       {% for card in cards %}
+       <div class="clear"></div>
 
-          <div class="w3-card-4 w3-white" style="width:40%;">
-            <header class="w3-container">
-              <h2>{{ card['title'] }}</h2>
-            </header>
+      <div id="card_container">
 
-            <div class="w3-container">
-              <p>{{ card['content'] }}</p>
-            </div>
-
-            <footer class="w3-container">
-            </footer>
-          </div>
-          <br>
-       {% endfor %}
-
+      </div>
      </div>
    </div>
 
