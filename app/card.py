@@ -13,19 +13,12 @@ bp = Blueprint('card', __name__, url_prefix='/card')
 @bp.route('/', methods=(['POST']))
 def register():
     if request.method == 'POST':
+        obJson = request.get_json()
+        print(obJson)
         title = request.form['title']
         content = request.form['content']
         hint = request.form['hint']
         group = request.form['group']
-
-        error = None
-
-        if not title:
-            error = 'Title is required'
-        elif not content:
-            error = 'Content is required'
-
-        flash(error)  # what is this?
 
         if len(group) > 0:
             c = Card(title=title, content=content, hint=hint)
@@ -44,13 +37,16 @@ def users(filter):
     print("hello")
     if len(filter) > 0:
         schema = CardSchema()
-        group = Group.query.filter_by(title=filter).first()
-        cards = Card.query.join(Card.groups).filter_by(id=group.id).all()
         data = []
+
+        if filter == "All":
+            cards = Card.query.all()
+        else:
+            group = Group.query.filter_by(title=filter).first()
+            cards = Card.query.join(Card.groups).filter_by(id=group.id).all()
 
         for card in cards:
             data.append(schema.dump(card))
-
     else:
         pass
 

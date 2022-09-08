@@ -24,12 +24,16 @@
     {% block body %}{% endblock %}
     <div class="w3-row">
 
-     <div class="w3-quarter w3-container">
+     <div class="w3-quarter w3-container overflow">
        <div>
         <h2 class="float-left">Groups</h2>
         <button onclick="document.getElementById('group_form').style.display='block'" class="w3-button w3-black float-right" style="margin-top:5%;">+</button>
       </div>
       <div class="clear"></div>
+
+        <div class="group-card" style="width:100%;">
+            <h5>All</h5>
+        </div>
         {% if groups %}
           {% for group in groups %}
 
@@ -37,22 +41,31 @@
                  <h5>{{ group['title'] }}</h5>
 
              </div>
-             <br>
           {% endfor %}
          {% endif %}
        </div>
 
-     <div class="w3-half w3-container">
+     <div class="w3-half w3-container overflow">
         <div>
           <h2 class="float-left">Cards</h2>
          <button onclick="document.getElementById('card_form').style.display='block'" class="w3-button w3-black float-right" style="margin-top:2%;">+</button>
        </div>
        <div class="clear"></div>
 
-      <div id="card_container">
+      <div id="card_container" class="w3-row">
 
       </div>
      </div>
+
+
+      <div class="w3-quarter w3-container">
+        <button class="w3-button w3-black"> Pratice </button>
+      </div>
+      <div class="clear"></div>
+
+   </div>
+   <div class="footer">
+     <p>having fun</p>
    </div>
 
 
@@ -65,12 +78,12 @@
             <form class="w3-container w3-margin" method="post" action="/card">
             <input type=hidden name="group" id="ipt_group_id" type="text">
              <label>Title</label>
-             <input class="w3-input w3-border-0" type="text" name="title">
+             <input id="iptTitle"class="w3-input w3-border-0" type="text" name="title">
              <label>Content</label>
-             <input class="w3-input w3-border-0" type="textarea" name="content">
+             <input id="iptContent"class="w3-input w3-border-0" type="textarea" name="content">
              <label>Hint</label>
-             <input class="w3-input w3-border-0" type="text" name="hint">
-            <button class="w3-btn w3-blue-grey">Create</button>
+             <input id="iptHint"class="w3-input w3-border-0" type="text" name="hint">
+            <button id="iptCreateCard"class="w3-btn w3-blue-grey">Create</button>
             </form>
           </div>
         </div>

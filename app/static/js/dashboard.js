@@ -59,8 +59,10 @@ function load(){
 
         div_card.classList.add("w3-card-4");
         div_card.classList.add("w3-white");
-        div_card.style.width = "50%";
-        div_card.style.marginBottom = "1%";
+        div_card.classList.add("fade-in");
+        div_card.classList.add("w3-third");
+        //div_card.style.width = "50%";
+        div_card.style.margin = "1%";
         header.classList.add("w3-container");
         h4.innerHTML=cards.title;
         p.innerHTML=cards.content;
@@ -75,6 +77,29 @@ function load(){
 
     function cleanCards(){
       card_container.innerHTML ="";
+    }
+
+
+    function post_card(){
+      var title = document.getElementById('iptTitle');
+      var content = document.getElementById('iptContent');
+      var hint = document.getElementById('iptHint');
+      var data = {'title':title.value,
+                  'content':content.value,
+                  'hint':hint.value,
+                  'group':idgroup.value}
+      var response =  $.ajax({
+        type: "POST",
+        url: "/card",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (data) {
+          if(data.success==true){
+                 console.log(data)
+          }
+        }
+      });
     }
 
 }

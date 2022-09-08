@@ -1,13 +1,22 @@
+html{
+  height:100%;
+}
 body{
+  height: 100%;
   background-image: linear-gradient(to right top, #fbe60f, #ff9800, #ff1258, #ff00a4, #7912eb);
   background-repeat: no-repeat;
+  scrollbar-color: orange rgba(255, 255, 255, 0.2);
+  scrollbar-width: thin;
 }
 
 .group-card{
+  padding-left: 3%;
   border: 2px solid white;
   border-radius: 5px;
   cursor:pointer;
+  margin-bottom: 3%;
 }
+
 .group-card-selected{
   background-color: white;
   color:black;
@@ -21,4 +30,31 @@ body{
 }
 .clear{
   clear:both;
+}
+
+.overflow{
+  height: 100vh;
+  overflow: auto;
+
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.fixed{
+  position: fixed;
+}
+
+.fade-in{
+  animation: fadeIn 1s;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
