@@ -2,7 +2,7 @@ window.onload = load;
 
 function load(){
 
-
+  var idgroup = document.getElementById("ipt_group_id");
   const cards = document.querySelectorAll('.group-card');
   var card_container = document.getElementById('card_container');
 
@@ -12,6 +12,7 @@ function load(){
     console.log('box clicked', event);
     card.classList.add("group-card-selected")
     get_cards()
+    idgroup.value = get_selected_card().firstElementChild.innerHTML
 
   });
 });
@@ -22,19 +23,24 @@ function load(){
     });
   };
 
+  function get_selected_card(){
+    return document.querySelectorAll('.group-card-selected')[0];
+  }
+
   function get_cards(filter){
-    var data = {'filter':filter};
+    var filter =get_selected_card().firstElementChild.innerHTML//.firstChild.text
+    console.log(filter)
+
 
     var response =  $.ajax({
         type: "GET",
-        url: "/card",
-        data: JSON.stringify(data),
+        url: "/card/"+ filter,
         contentType: "application/json",
         dataType: 'json',
         success: function (data) {
           if(data.success==true){
-             console.log("it works gentji")
-             show_cards(["as","as","ksa"])
+             console.log(data.data)
+             show_cards(data.data)
           }
         }
       });
@@ -45,7 +51,7 @@ function load(){
       //or can i just make it availabel for jinja2
       cleanCards()
 
-      for (let i = 0; i < 5; i++) {
+      for (var cards of list_of_cards) {
         var div_card = document.createElement("div");
         var header = document.createElement("header");
         var h4 = document.createElement("h4");
@@ -56,8 +62,8 @@ function load(){
         div_card.style.width = "50%";
         div_card.style.marginBottom = "1%";
         header.classList.add("w3-container");
-        h4.innerHTML="no"
-        p.innerHTML="you need to let it go"
+        h4.innerHTML=cards.title;
+        p.innerHTML=cards.content;
 
         header.appendChild(h4)
         header.appendChild(p)

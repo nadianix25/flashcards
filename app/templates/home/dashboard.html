@@ -34,12 +34,8 @@
           {% for group in groups %}
 
              <div class="group-card" style="width:100%;">
-               <header class="w3-container">
                  <h5>{{ group['title'] }}</h5>
-               </header>
 
-               <footer class="w3-container">
-               </footer>
              </div>
              <br>
           {% endfor %}
@@ -65,7 +61,9 @@
         <div class="w3-modal-content">
           <div class="w3-container">
             <span onclick="document.getElementById('card_form').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+
             <form class="w3-container w3-margin" method="post" action="/card">
+            <input type=hidden name="group" id="ipt_group_id" type="text">
              <label>Title</label>
              <input class="w3-input w3-border-0" type="text" name="title">
              <label>Content</label>

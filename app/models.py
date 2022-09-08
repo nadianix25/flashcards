@@ -1,5 +1,6 @@
 from sqlalchemy.dialects.postgresql import JSON
 from flask_sqlalchemy import SQLAlchemy
+from marshmallow_sqlalchemy import SQLAlchemySchema, auto_field, SQLAlchemyAutoSchema
 
 
 """
@@ -41,3 +42,17 @@ class Group(db.Model):
     def __repr__(self):
         #return '<id {}>'.format(self.id)
         return '<Group -> {}>'.format(self.title)
+
+
+class CardSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Card
+        include_relationships = True
+        load_instance = True
+
+
+class GroupSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Group
+        include_fk = True
+        load_instance = True
