@@ -9,7 +9,14 @@ To run server:
 
 To initialized database please run:
 
-  flask --app app init-db
+  flask --app app init db
+
+To create DATABASE
+first make sure we have all the configurations needed
+>>> from app.models import db, Card, Group
+>>> db.create_all()
+>>> exit()
+
 
 To run python black:
    python -m black .

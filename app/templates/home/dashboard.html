@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mypersonalstyle.css') }}">
     <title>Dashboard</title>
 
   </head>
+   <script src="{{ url_for('static',filename='js/dashboard.js') }}"></script>
   <body>
+
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul class=flashes>
@@ -21,36 +24,48 @@
     {% block body %}{% endblock %}
     <div class="w3-row">
 
-     <div class="w3-quarter w3-container">
-           <h2>Groups</h2>
-       </div>
+     <div class="w3-quarter w3-container overflow">
+       <div>
+        <h2 class="float-left">Groups</h2>
+        <button onclick="document.getElementById('group_form').style.display='block'" class="w3-button w3-black float-right" style="margin-top:5%;">+</button>
+      </div>
+      <div class="clear"></div>
 
-     <div class="w3-threequarter w3-container">
-        <div style="float:center">
-          <h2>Cards</h2>
+        <div class="group-card" style="width:100%;">
+            <h5>All</h5>
         </div>
-       <div style="float:right">
-         <button onclick="document.getElementById('card_form').style.display='block'" class="w3-button w3-black">new card</button>
+        {% if groups %}
+          {% for group in groups %}
+
+             <div class="group-card" style="width:100%;">
+                 <h5>{{ group['title'] }}</h5>
+
+             </div>
+          {% endfor %}
+         {% endif %}
        </div>
-       <br>
-       {% for card in cards %}
 
-          <div class="w3-card-4 w3-white" style="width:40%;">
-            <header class="w3-container">
-              <h2>{{ card['title'] }}</h2>
-            </header>
+     <div class="w3-half w3-container overflow">
+        <div>
+          <h2 class="float-left">Cards</h2>
+         <button onclick="document.getElementById('card_form').style.display='block'" class="w3-button w3-black float-right" style="margin-top:2%;">+</button>
+       </div>
+       <div class="clear"></div>
 
-            <div class="w3-container">
-              <p>{{ card['content'] }}</p>
-            </div>
+      <div id="card_container" class="w3-row">
 
-            <footer class="w3-container">
-            </footer>
-          </div>
-          <br>
-       {% endfor %}
-
+      </div>
      </div>
+
+
+      <div class="w3-quarter w3-container">
+        <button class="w3-button w3-black"> Pratice </button>
+      </div>
+      <div class="clear"></div>
+
+   </div>
+   <div class="footer">
+     <p>having fun</p>
    </div>
 
 
@@ -59,14 +74,16 @@
         <div class="w3-modal-content">
           <div class="w3-container">
             <span onclick="document.getElementById('card_form').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+
             <form class="w3-container w3-margin" method="post" action="/card">
+            <input type=hidden name="group" id="ipt_group_id" type="text">
              <label>Title</label>
-             <input class="w3-input w3-border-0" type="text" name="title">
+             <input id="iptTitle"class="w3-input w3-border-0" type="text" name="title">
              <label>Content</label>
-             <input class="w3-input w3-border-0" type="textarea" name="content">
+             <input id="iptContent"class="w3-input w3-border-0" type="textarea" name="content">
              <label>Hint</label>
-             <input class="w3-input w3-border-0" type="text" name="hint">
-            <button class="w3-btn w3-blue-grey">Create</button>
+             <input id="iptHint"class="w3-input w3-border-0" type="text" name="hint">
+            <button id="iptCreateCard"class="w3-btn w3-blue-grey">Create</button>
             </form>
           </div>
         </div>
