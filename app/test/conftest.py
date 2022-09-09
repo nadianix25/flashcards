@@ -10,11 +10,18 @@ def new_card():
 
 
 @pytest.fixture(scope="session")
+def new_group():
+    group = Group(title='Test Group',
+                  description='Just a test group')
+    return group
+
+
+@pytest.fixture(scope="session")
 def app():
-    return give_me_app()
+    return config_app()
 
 
-def give_me_app():
+def config_app():
     app = create_app('flask_test.cfg')
     app.app_context().push()
     db.drop_all(app=app)  # clean database
