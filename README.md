@@ -20,3 +20,14 @@ first make sure we have all the configurations needed
 
 To run python black:
    python -m black .
+
+
+To run tests:
+python -m pytest
+
+specifics:
+python -m pytest test/unit
+
+
+last failed
+python -m pytest --last-failed
