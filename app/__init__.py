@@ -1,3 +1,7 @@
+"""This is the init module.
+
+This module initializes the application
+"""
 import os
 
 from flask import Flask
@@ -16,7 +20,7 @@ def create_app(test_config=None):
     else:
         # load the test config if passed in
         app.config.from_object("app.config.Test")
-        #models.db.create_all(app=app)
+        # models.db.create_all(app=app)
 
     models.db.init_app(app)
 

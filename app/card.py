@@ -1,24 +1,38 @@
+"""This is the card Blueprint module.
+
+This module perform specefic actions to the card endpoint
+it must be resgister in the app
+"""
+
 import functools
 
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, json
+    Blueprint,
+    flash,
+    g,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+    json,
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.models import db, Card, Group, CardSchema
 
-bp = Blueprint('card', __name__, url_prefix='/card')
+bp = Blueprint("card", __name__, url_prefix="/card")
 
 
-@bp.route('/', methods=(['POST']))
+@bp.route("/", methods=(["POST"]))
 def register():
-    if request.method == 'POST':
+    if request.method == "POST":
         obJson = request.get_json()
         print(obJson)
-        title = request.form['title']
-        content = request.form['content']
-        hint = request.form['hint']
-        group = request.form['group']
+        title = request.form["title"]
+        content = request.form["content"]
+        hint = request.form["hint"]
+        group = request.form["group"]
 
         if len(group) > 0:
             c = Card(title=title, content=content, hint=hint)
@@ -28,12 +42,12 @@ def register():
             c.groups.append(g)
             db.session.commit()
 
-    return redirect(url_for('home.home'))
+    return redirect(url_for("home.home"))
 
 
-@bp.route('/<filter>', methods=(['GET']))
+@bp.route("/<filter>", methods=(["GET"]))
 def users(filter):
-    #recieving jsong here
+    # recieving jsong here
     print("hello")
     if len(filter) > 0:
         schema = CardSchema()
@@ -50,4 +64,8 @@ def users(filter):
     else:
         pass
 
-    return json.dumps({'success': True, 'data': data}), 200, {'ContentType': 'application/json'}
+    return (
+        json.dumps({"success": True, "data": data}),
+        200,
+        {"ContentType": "application/json"},
+    )
