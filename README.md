@@ -1,6 +1,10 @@
 # flashcards
 Flashcards web app with flask
 
+Flashcards are card notes used to pratice memory. They contain concenpts and information. Basically you pick a card, look at the concept i try to retrieve the information withtout looking. 
+
+This application mimics that process! Its a CRUD for cards and groups of cards that then will let you in a vizualization mode of the cards for pratice.
+
 to install dependencies please run the following command:
 ```
   pip install -r requirements.txt
