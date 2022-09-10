@@ -26,21 +26,19 @@ bp = Blueprint("card", __name__, url_prefix="/card")
 
 @bp.route("/", methods=(["POST"]))
 def register():
-    if request.method == "POST":
-        obJson = request.get_json()
-        print(obJson)
-        title = request.form["title"]
-        content = request.form["content"]
-        hint = request.form["hint"]
-        group = request.form["group"]
+    obJson = request.get_json()
+    group = obJson.get('group')
+    title = obJson.get('title')
+    content = obJson.get('content')
+    hint = obJson.get('hint')
 
-        if len(group) > 0:
-            c = Card(title=title, content=content, hint=hint)
-            db.session.add(c)
-            db.session.commit()
-            g = Group.query.filter_by(title=group).first()
-            c.groups.append(g)
-            db.session.commit()
+    if len(group) > 0:
+       c = Card(title=title, content=content, hint=hint)
+       db.session.add(c)
+       db.session.commit()
+       g = Group.query.filter_by(title=group).first()
+       c.groups.append(g)
+       db.session.commit()
 
     return redirect(url_for("home.home"))
 

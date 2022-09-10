@@ -5,6 +5,9 @@ function load(){
   var idgroup = document.getElementById("ipt_group_id");
   const cards = document.querySelectorAll('.group-card');
   var card_container = document.getElementById('card_container');
+  const btnCreateCard = document.getElementById('iptCreateCard');
+
+  btnCreateCard.addEventListener('click', post_card);
 
   cards.forEach(card => {
   card.addEventListener('click', function handleClick(event) {
@@ -100,6 +103,17 @@ function load(){
           }
         }
       });
+
+      document.getElementById('card_form').style.display='none';
+      refresh_cards()
+    }
+
+    function refresh_cards(){
+      setTimeout(function(){
+        var filter =get_selected_card().firstElementChild.innerHTML//.firstChild.text
+        get_cards(filter)
+
+      }, 500);
     }
 
 }
