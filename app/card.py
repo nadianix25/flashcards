@@ -40,13 +40,15 @@ def register():
        c.groups.append(g)
        db.session.commit()
 
-    return redirect(url_for("home.home"))
+    return (
+        json.dumps({"success": True}),
+        200,
+        {"ContentType": "application/json"},
+    )
 
 
-@bp.route("/<filter>", methods=(["GET"]))
-def users(filter):
-    # recieving jsong here
-    print("hello")
+@bp.route("/group/<filter>", methods=(["GET"]))
+def cards_in_group(filter):
     if len(filter) > 0:
         schema = CardSchema()
         data = []
@@ -64,6 +66,56 @@ def users(filter):
 
     return (
         json.dumps({"success": True, "data": data}),
+        200,
+        {"ContentType": "application/json"},
+    )
+
+
+@bp.route("/<id>", methods=(["GET"]))
+def cards(id):
+
+    card = Card.query.filter_by(id=id).first()
+    schema = CardSchema()
+    data = schema.dump(card)
+
+    return (
+        json.dumps({"success": True, "data": data}),
+        200,
+        {"ContentType": "application/json"},
+    )
+
+
+@bp.route("/<id>", methods=(["DELETE"]))
+def delete(id):
+
+    card = Card.query.filter_by(id=id).first()
+    db.session.delete(card)
+    db.session.commit()
+
+    return (
+        json.dumps({"success": True}),
+        200,
+        {"ContentType": "application/json"},
+    )
+
+
+@bp.route("/<id>", methods=(["PATCH"]))
+def update(id):
+    obJson = request.get_json()
+    id = obJson.get('id')
+    title = obJson.get('title')
+    content = obJson.get('content')
+    hint = obJson.get('hint')
+
+    card = Card.query.filter_by(id=id).first()
+    card.title = title
+    card.content = content
+    card.hint = hint
+    card.groups = []
+
+    db.session.commit()
+    return (
+        json.dumps({"success": True}),
         200,
         {"ContentType": "application/json"},
     )

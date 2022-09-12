@@ -6,7 +6,7 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from . import card, home, group, models
+from . import card, home, group, models, pratice
 
 
 # create and configure the app
@@ -27,5 +27,6 @@ def create_app(test_config=None):
     app.register_blueprint(card.bp)
     app.register_blueprint(home.bp)
     app.register_blueprint(group.bp)
+    app.register_blueprint(pratice.bp)
 
     return app

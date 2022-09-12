@@ -59,7 +59,12 @@
 
 
       <div class="w3-quarter w3-container">
-        <button class="w3-button w3-black"> Pratice </button>
+        <center>
+          <button id="btnPratice"class="w3-button w3-black w3-margin-top"> Pratice </button>
+          <h4 id="display_group"></h4>
+          <h6 id="display_group_description"></h6>
+
+        </center>
       </div>
       <div class="clear"></div>
 
@@ -99,6 +104,25 @@
              <input class="w3-input w3-border-0" type="textarea" name="description">
             <button class="w3-btn w3-blue-grey">Create</button>
             </form>
+          </div>
+        </div>
+      </div>
+      <!-- Modal to edit a card-->
+      <div id="card_edit_form" class="w3-modal w3-card">
+        <div class="w3-modal-content">
+          <div class="w3-container">
+            <span onclick="document.getElementById('card_edit_form').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <div class="w3-container w3-margin">
+            <input type=hidden name="id" id="iptIdCard" type="text">
+             <label>Title</label>
+             <input id="iptTitleEdit" class="w3-input w3-border-0" type="text" name="title">
+             <label>Content</label>
+             <input id="iptContentEdit"class="w3-input w3-border-0" type="textarea" name="content">
+             <label>Hint</label>
+             <input id="iptHintEdit"class="w3-input w3-border-0" type="text" name="hint">
+            <button id="iptEditCard"class="w3-btn w3-blue-grey">Save</button>
+            <button id="iptDeleteCard"class="w3-btn w3-red">Delete</button>
+          </div>
           </div>
         </div>
       </div>
