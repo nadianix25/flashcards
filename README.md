@@ -24,6 +24,13 @@ or just
 ```
 flask --app app run
 ```
+## Database
+Before running the application create the database schema by opening the flask shell and running the following commands
+```
+  from app.models import *
+  db.create_all()
+  exit()
+```
 
 ## Testing
 The tests runs on a sqlite database configured when the test config is used.
