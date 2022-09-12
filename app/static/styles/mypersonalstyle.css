@@ -22,6 +22,10 @@ body{
   color:black;
 }
 
+.group-card{
+  cursor:pointer;
+}
+
 .float-left{
   float:left;
 }
