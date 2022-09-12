@@ -89,6 +89,7 @@ def cards(id):
 def delete(id):
 
     card = Card.query.filter_by(id=id).first()
+    card.groups = []
     db.session.delete(card)
     db.session.commit()
 
