@@ -16,7 +16,9 @@
       {% if messages %}
         <ul class=flashes>
         {% for message in messages %}
+          {% if message!= None %}
           <li>{{ message }}</li>
+          {% endif %}
         {% endfor %}
         </ul>
       {% endif %}
@@ -61,8 +63,8 @@
       <div class="w3-quarter w3-container">
         <center>
           <button id="btnPratice"class="w3-button w3-black w3-margin-top"> Pratice </button>
-          <h4 id="display_group"></h4>
-          <h6 id="display_group_description"></h6>
+          <h4 id="display_group" class="fade-in"></h4>
+          <h6 id="display_group_description" class="fade-in"></h6>
 
         </center>
       </div>

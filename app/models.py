@@ -13,8 +13,10 @@ db = SQLAlchemy()
 
 card_groups = db.Table(
     "card_groups",
-    db.Column("card_id", db.Integer, db.ForeignKey("card.id")),
-    db.Column("group_id", db.Integer, db.ForeignKey("groups.id")),
+    db.Column("card_id", db.Integer, db.ForeignKey(
+        "card.id", ondelete="CASCADE")),
+    db.Column("group_id", db.Integer, db.ForeignKey(
+        "groups.id", ondelete="CASCADE")),
 )
 
 
@@ -26,7 +28,7 @@ class Card(db.Model):
     content = db.Column(db.String())
     hint = db.Column(db.String())
     groups = db.relationship(
-        "Group", secondary=card_groups, backref=db.backref("groups")
+        "Group", secondary=card_groups, backref=db.backref("groups"), cascade="all, delete"
     )
 
     def __repr__(self):

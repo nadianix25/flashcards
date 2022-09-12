@@ -111,8 +111,6 @@ def update(id):
     card.title = title
     card.content = content
     card.hint = hint
-    card.groups = []
-
     db.session.commit()
     return (
         json.dumps({"success": True}),

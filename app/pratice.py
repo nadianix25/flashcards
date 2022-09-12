@@ -25,5 +25,11 @@ bp = Blueprint("pratice", __name__, url_prefix="/pratice")
 
 @bp.route("/<group>", methods=(["GET"]))
 def prepare_group(group):
-    groups = Group.query.all()
-    return render_template("slide/slideshow.html")
+    if group == "All":
+        group = {'title': "All cards", 'description': "Group of all the cards"}
+        cards = Card.query.all()
+    else:
+        group = Group.query.filter_by(title=group).first()
+        cards = Card.query.join(Card.groups).filter_by(id=group.id).all()
+
+    return render_template("slide/slideshow.html", cards=cards, group=group)
