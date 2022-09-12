@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mypersonalstyle.css') }}">
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/slide.css') }}">
 
@@ -14,32 +15,14 @@
   <body>
 <div class="w3-row">
   <div class ="w3-quarter w3-margin-top">
-    <h5>{{group['title']}}</h5>
+    <h5 id="group">{{group['title']}}</h5>
     <p>{{group['description']}}</p>
   </div>
-  <div class=" w3-half w3-margin-top">
-    <div class="w3-content">
-      {% if cards %}
-        {% for card in cards %}
 
-        <div class="w3-card-4 cards w3-white">
-
-           <header class="w3-container w3-white w3-center ">
-             <p class="w3-right">Total cards: {{cards|length}}</p>
-           </header>
-
-           <div class="w3-container w3-white">
-             <h1 class="w3-center">{{ card['title'] }}</h1>
-           </div>
-
-           <footer class="w3-container w3-white">
-             <p class="w3-center" id="content"></p>
-
-           </footer>
-
-        </div>
-        {% endfor %}
-       {% endif %}
+  <div class=" w3-half">
+    <p class="w3-right">Total cards: {{cards|length}}</p>
+    <br>
+    <div id="cards_container" class="w3-content  w3-margin-top">
 
     </div>
 
@@ -51,7 +34,6 @@
     </div>
   </div>
   <div class="w3-quarter w3-margin-top">
-    time lapsed
 
   </div>
 </div>

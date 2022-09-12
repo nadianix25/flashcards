@@ -16,7 +16,9 @@
       {% if messages %}
         <ul class=flashes>
         {% for message in messages %}
+          {% if message!= None %}
           <li>{{ message }}</li>
+          {% endif %}
         {% endfor %}
         </ul>
       {% endif %}
